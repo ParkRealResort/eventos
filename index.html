@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Upload Festa</title>
+    <style>
+      body {
+        background-image: url('SUA_IMAGEM_DE_FUNDO_AQUI.jpg');
+        background-size: cover;
+        font-family: Arial, sans-serif;
+        text-align: center;
+        color: #ffffff;
+      }
+      h1 {
+        color: #ffcc00;
+      }
+      button {
+        background-color: #ffcc00;
+        padding: 10px 20px;
+        border: none;
+        cursor: pointer;
+      }
+      #status {
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Bem-vindo à Festa Incrível!</h1>
+    <p>Envie suas fotos e vídeos abaixo:</p>
+    <input type="file" id="fileInput" accept="image/*,video/*" multiple>
+    <button onclick="uploadFiles()">Enviar</button>
+    <div id="status"></div>
+
+    <script src="https://script.google.com/macros/s/AKfycbzM6azu9dpbgAWWtbedz_Ym_srpgaPFMTZzmAR58KYG2RxJCRY7DLSTm8ivMPufI16e/exec"></script>
+    <script>
+      function uploadFiles() {
+        var files = document.getElementById('fileInput').files;
+        for (var i = 0; i < files.length; i++) {
+          google.script.run.withSuccessHandler(function(url) {
+            document.getElementById('status').innerHTML += 'Upload concluído: ' + files[i].name + '<br>';
+          }).uploadFile(files[i]);
+        }
+      }
+    </script>
+  </body>
+</html>
